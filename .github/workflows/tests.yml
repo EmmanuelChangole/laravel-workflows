@@ -6,20 +6,14 @@ jobs:
   tests:
     runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        php: [8.2, 8.3]
-
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
-      - name: Setup PHP
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: ${{ matrix.php }}
+      - name: Build test image
+        run: make build
 
-      - name: Install dependencies
-        run: composer install --prefer-dist --no-progress
+      - name: Install dependencies (container)
+        run: make install
 
-      - name: Run tests
-        run: ./vendor/bin/pest
+      - name: Run tests (container)
+        run: make test

@@ -1,14 +1,33 @@
-# changole/laravel-workflows
+# Laravel Workflows
+
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/changole/laravel-workflows.svg?style=flat-square)](https://packagist.org/packages/changole/laravel-workflows)
+[![Total Downloads](https://img.shields.io/packagist/dt/changole/laravel-workflows.svg?style=flat-square)](https://packagist.org/packages/changole/laravel-workflows)
+[![License](https://img.shields.io/packagist/l/changole/laravel-workflows?style=flat-square)](https://packagist.org/packages/changole/laravel-workflows)
+[![Tests](https://github.com/EmmanuelChangole/laravel-workflows/actions/workflows/tests.yml/badge.svg?branch=main)](https://github.com/EmmanuelChangole/laravel-workflows/actions/workflows/tests.yml)
 
 A lightweight, Laravel-native workflow engine for Eloquent models with explicit transitions, guard validation, events, and audit history.
 
+## Features
+
+- Define explicit state transitions for Eloquent models.
+- Enforce guard rules before transitions are applied.
+- Emit transition lifecycle events for integrations and listeners.
+- Keep audit history for transition activity.
+- Configure behavior through publishable Laravel config.
+
 ## Installation
+
+You can install the package via composer:
 
 ```bash
 composer require changole/laravel-workflows
 ```
 
-Publish config and migration:
+## Configuration
+
+### Publishing Config and Migrations
+
+Publish the package configuration and migrations:
 
 ```bash
 php artisan vendor:publish --tag=workflow-config
@@ -16,9 +35,21 @@ php artisan vendor:publish --tag=workflow-migrations
 php artisan migrate
 ```
 
-## Quick Start
+### Config Example
 
-Define a workflow:
+```php
+return [
+    'state_field' => 'state',
+    'auto_set_initial_state' => true,
+    'audit' => [
+        'enabled' => true,
+    ],
+];
+```
+
+## Usage
+
+### Define a Workflow
 
 ```php
 <?php
@@ -55,7 +86,7 @@ class PostWorkflow extends WorkflowDefinition
 }
 ```
 
-Attach to a model:
+### Attach to a Model
 
 ```php
 <?php
@@ -73,7 +104,7 @@ class Post extends Model
 }
 ```
 
-Use it:
+### Apply Transitions
 
 ```php
 $post->workflow()->state();
@@ -87,18 +118,6 @@ $post->workflow()->apply('submit', auth()->user(), ['source' => 'api']);
 - Successful transitions dispatch `WorkflowTransitioning` then `WorkflowTransitioned`.
 - Audit entries are written to `workflow_transition_logs` when `workflow.audit.enabled = true`.
 
-## Config
-
-```php
-return [
-    'state_field' => 'state',
-    'auto_set_initial_state' => true,
-    'audit' => [
-        'enabled' => true,
-    ],
-];
-```
-
 ## Docker Test Workflow
 
 ```bash
@@ -106,3 +125,4 @@ make build
 make install
 make test
 ```
+

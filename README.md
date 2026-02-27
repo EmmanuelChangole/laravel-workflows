@@ -7,6 +7,8 @@
 
 A lightweight, Laravel-native workflow engine for Eloquent models with explicit transitions, guard validation, events, and audit history.
 
+Supports Laravel 10, 11, and 12.
+
 ## Features
 
 - Define explicit state transitions for Eloquent models.

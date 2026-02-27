@@ -126,3 +126,15 @@ make install
 make test
 ```
 
+## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+## License
+
+The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
+
+## Credits
+
+- [Emmanuel Changole](https://github.com/EmmanuelChangole)
+- [All Contributors](../../contributors)
